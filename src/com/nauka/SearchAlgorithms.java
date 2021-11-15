@@ -1,22 +1,11 @@
 package com.nauka;
 
-import java.io.File;
 import java.util.List;
 
 public class SearchAlgorithms {
-    List<String> whatList;
-    List<String> whereList;
-    Input input = new Input();
 
-    public SearchAlgorithms(File findWhat, File findWhere) {
-        whatList = input.loadFileToMemory(findWhat);
-        whereList = input.loadFileToMemory(findWhere);
-    }
-
-    int linearSearchAndCount() {
+    int linearSearchAndCount(List<String> whatList, List<String> whereList) {
         int count = 0;
-
-        System.out.println("Start searching...");
 
         for (String what : whatList) {
             for (String where : whereList) {
@@ -29,5 +18,13 @@ public class SearchAlgorithms {
         return count;
 
     }
+
+    int jumpSearchAndCount(List<String> whatList, List<String> whereList) {
+        int count = 0;
+
+        return count;
+
+    }
+
 
 }

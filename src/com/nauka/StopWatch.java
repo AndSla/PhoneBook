@@ -8,23 +8,28 @@ public class StopWatch {
         this.startTime = System.currentTimeMillis();
     }
 
+    void setStartTime(String message) {
+        System.out.println(message);
+        this.startTime = System.currentTimeMillis();
+    }
+
     void setStopTime() {
         this.stopTime = System.currentTimeMillis();
     }
 
-    long getMin(){
+    long getMin() {
         return (stopTime - startTime) / 60000;
     }
 
-    long getSec(){
+    long getSec() {
         return ((stopTime - startTime) - getMin() * 60000) / 1000;
     }
 
-    long getMillis(){
+    long getMillis() {
         return (stopTime - startTime) - getMin() * 60000 - getSec() * 1000;
     }
 
-    void printResult(int entries){
+    void printResult(int entries) {
         String result = "Found " +
                 entries +
                 " / " +
@@ -37,7 +42,20 @@ public class StopWatch {
                 getMillis() +
                 " ms.";
 
+        System.out.print(result + "\n\n");
+    }
+
+    void printResult(String message) {
+        String result = message + " " +
+                getMin() +
+                " min. " +
+                getSec() +
+                " sec. " +
+                getMillis() +
+                " ms.";
+
         System.out.println(result);
     }
+
 
 }
