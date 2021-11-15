@@ -5,13 +5,13 @@ import java.io.File;
 public class Main {
 
     public static void main(String[] args) {
-        File fileFind = new File("find.txt");
-        File fileDir = new File("directory.txt");
-        LinearSearch linearAlgorithm = new LinearSearch(fileFind, fileDir);
+        File fileFind = new File("small_find.txt");
+        File fileDir = new File("small_directory.txt");
+        SearchAlgorithms searchAlgorithms = new SearchAlgorithms(fileFind, fileDir);
         StopWatch stopWatch = new StopWatch();
 
         stopWatch.setStartTime();
-        int entries = linearAlgorithm.searchAndCount();
+        int entries = searchAlgorithms.linearSearchAndCount();
         stopWatch.setStopTime();
         stopWatch.printResult(entries);
 
