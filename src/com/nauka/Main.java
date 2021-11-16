@@ -21,17 +21,26 @@ public class Main {
         StopWatch sortingStopWatch = sorting.getStopWatch();
         StopWatch totalTimeStopWatch = new StopWatch();
 
+        System.out.println("Start searching (linear search)...");
         int foundedEntries = search.linearSearchAndCount(linesToFind, linesFromDir);
         searchStopWatch.printResult(foundedEntries);
+        long time = searchStopWatch.getStopTime() - searchStopWatch.getStartTime();
 
-        List<String> sortedLinesFromDir = sorting.bubbleSort(linesFromDir);
-        foundedEntries = search.blockSearchAndCount(linesToFind, sortedLinesFromDir);
+        boolean takesTooLong = sorting.bubbleSort(linesFromDir, time);
+        String message = "";
+        if (takesTooLong) {
+            message = " - STOPPED, moved to linear search";
+            foundedEntries = search.linearSearchAndCount(linesToFind, linesFromDir);
+        } else {
+            foundedEntries = search.blockSearchAndCount(linesToFind, sorting.getSortedList());
+        }
+
         totalTimeStopWatch.setStartTime(sortingStopWatch.getStartTime());
         totalTimeStopWatch.setStopTime(searchStopWatch.getStopTime());
         totalTimeStopWatch.printResult(foundedEntries);
 
-        sortingStopWatch.printResult("Sorting time:");
-        searchStopWatch.printResult("Searching time:");
+        sortingStopWatch.printResult("Sorting time:", message);
+        searchStopWatch.printResult("Searching time:", "");
 
     }
 

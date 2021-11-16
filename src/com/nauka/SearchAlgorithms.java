@@ -8,7 +8,7 @@ public class SearchAlgorithms {
     int linearSearchAndCount(List<String> whatList, List<String> whereList) {
         int count = 0;
 
-        stopWatch.start("Start searching (linear search)...");
+        stopWatch.start();
 
         for (String what : whatList) {
             for (String where : whereList) {

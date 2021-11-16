@@ -4,8 +4,9 @@ import java.util.List;
 
 public class SortingAlgorithms {
     private final StopWatch stopWatch = new StopWatch();
+    List<String> sortedList;
 
-    public List<String> bubbleSort(List<String> listToSort) {
+    public boolean bubbleSort(List<String> listToSort, long time) {
 
         boolean repeat = true;
 
@@ -24,11 +25,17 @@ public class SortingAlgorithms {
                 }
             }
 
+            stopWatch.stop();
+
+            if ((stopWatch.getStopTime() - stopWatch.getStartTime()) > 10 * time) {
+                return true;
+            }
+
         }
 
-        stopWatch.stop();
+        sortedList = listToSort;
 
-        return listToSort;
+        return false;
 
     }
 
@@ -36,4 +43,7 @@ public class SortingAlgorithms {
         return stopWatch;
     }
 
+    public List<String> getSortedList() {
+        return sortedList;
+    }
 }

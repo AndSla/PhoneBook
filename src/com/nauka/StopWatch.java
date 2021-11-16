@@ -61,14 +61,14 @@ public class StopWatch {
         System.out.println(result);
     }
 
-    void printResult(String message) {
-        String result = message + " " +
+    void printResult(String message1, String message2) {
+        String result = message1 + " " +
                 getMin() +
                 " min. " +
                 getSec() +
                 " sec. " +
                 getMillis() +
-                " ms.";
+                " ms." + message2;
 
         System.out.println(result);
     }
