@@ -3,10 +3,13 @@ package com.nauka;
 import java.util.List;
 
 public class SortingAlgorithms {
+    private final StopWatch stopWatch = new StopWatch();
 
     public List<String> bubbleSort(List<String> listToSort) {
 
         boolean repeat = true;
+
+        stopWatch.start("\n" + "Start searching (bubble sort + jump search)...");
 
         while (repeat) {
 
@@ -23,8 +26,14 @@ public class SortingAlgorithms {
 
         }
 
+        stopWatch.stop();
+
         return listToSort;
 
+    }
+
+    public StopWatch getStopWatch() {
+        return stopWatch;
     }
 
 }
