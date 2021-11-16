@@ -14,26 +14,24 @@ public class Main {
         List<String> linesToFind = input.loadFileToMemory(fileFind);
         List<String> linesFromDir = input.loadFileToMemory(fileDir);
 
-        SearchAlgorithms linearSearch = new SearchAlgorithms();
-        SearchAlgorithms blockSearch = new SearchAlgorithms();
-        SortingAlgorithms bubbleSort = new SortingAlgorithms();
+        SearchAlgorithms search = new SearchAlgorithms();
+        SortingAlgorithms sorting = new SortingAlgorithms();
 
-        StopWatch linearSearchStopWatch = linearSearch.getStopWatch();
-        StopWatch blockSearchStopWatch = blockSearch.getStopWatch();
-        StopWatch bubbleSortStopWatch = bubbleSort.getStopWatch();
+        StopWatch searchStopWatch = search.getStopWatch();
+        StopWatch sortingStopWatch = sorting.getStopWatch();
         StopWatch totalTimeStopWatch = new StopWatch();
 
-        int foundedEntries = linearSearch.linearSearchAndCount(linesToFind, linesFromDir);
-        linearSearchStopWatch.printResult(foundedEntries);
+        int foundedEntries = search.linearSearchAndCount(linesToFind, linesFromDir);
+        searchStopWatch.printResult(foundedEntries);
 
-        List<String> sortedLinesFromDir = bubbleSort.bubbleSort(linesFromDir);
-        foundedEntries = blockSearch.blockSearchAndCount(linesToFind, sortedLinesFromDir);
-        totalTimeStopWatch.setStartTime(bubbleSortStopWatch.getStartTime());
-        totalTimeStopWatch.setStopTime(blockSearchStopWatch.getStopTime());
+        List<String> sortedLinesFromDir = sorting.bubbleSort(linesFromDir);
+        foundedEntries = search.blockSearchAndCount(linesToFind, sortedLinesFromDir);
+        totalTimeStopWatch.setStartTime(sortingStopWatch.getStartTime());
+        totalTimeStopWatch.setStopTime(searchStopWatch.getStopTime());
         totalTimeStopWatch.printResult(foundedEntries);
 
-        bubbleSortStopWatch.printResult("Sorting time:");
-        blockSearchStopWatch.printResult("Searching time:");
+        sortingStopWatch.printResult("Sorting time:");
+        searchStopWatch.printResult("Searching time:");
 
     }
 
