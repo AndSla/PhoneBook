@@ -7,40 +7,40 @@ public class Main {
 
     public static void main(String[] args) {
         File fileFind = new File("small_find.txt");
-        File fileDir = new File("small_directory.txt");
+        File filePhoneBook = new File("small_directory.txt");
 
         Input input = new Input();
 
         List<String> linesToFind = input.loadFileToMemory(fileFind);
-        List<String> linesFromDir = input.loadFileToMemory(fileDir);
+        List<String> linesFromPhoneBook = input.loadFileToMemory(filePhoneBook);
 
-        SearchAlgorithms search = new SearchAlgorithms();
-        SortingAlgorithms sorting = new SortingAlgorithms();
+        SearchAlgorithm linear = new LinearSearch();
+        SearchAlgorithm block = new BlockSearch();
+        SortAlgorithm bubble = new BubbleSort();
 
-        StopWatch searchStopWatch = search.getStopWatch();
-        StopWatch sortingStopWatch = sorting.getStopWatch();
-        StopWatch totalTimeStopWatch = new StopWatch();
+        StopWatch totalTime = new StopWatch();
 
-        System.out.println("Start searching (linear search)...");
-        int foundedEntries = search.linearSearchAndCount(linesToFind, linesFromDir);
-        searchStopWatch.printResult(foundedEntries);
-        long time = searchStopWatch.getStopTime() - searchStopWatch.getStartTime();
+        totalTime.start();
 
-        boolean takesTooLong = sorting.bubbleSort(linesFromDir, time);
+        int foundedEntries = linear.search(linesToFind, linesFromPhoneBook, true);
+        linear.getStopWatch().printResult(foundedEntries);
+        long time = linear.getStopWatch().getTime();
+
+        boolean takesTooLong = bubble.sort(linesFromPhoneBook, time);
         String message = "";
         if (takesTooLong) {
             message = " - STOPPED, moved to linear search";
-            foundedEntries = search.linearSearchAndCount(linesToFind, linesFromDir);
+            foundedEntries = linear.search(linesToFind, linesFromPhoneBook, false);
         } else {
-            foundedEntries = search.blockSearchAndCount(linesToFind, sorting.getSortedList());
+            foundedEntries = block.search(linesToFind, bubble.getSortedList(), false);
         }
 
-        totalTimeStopWatch.setStartTime(sortingStopWatch.getStartTime());
-        totalTimeStopWatch.setStopTime(searchStopWatch.getStopTime());
-        totalTimeStopWatch.printResult(foundedEntries);
+        totalTime.stop();
 
-        sortingStopWatch.printResult("Sorting time:", message);
-        searchStopWatch.printResult("Searching time:", "");
+        totalTime.printResult(foundedEntries);
+
+        bubble.getStopWatch().printResult("Sorting time:", message);
+        linear.getStopWatch().printResult("Searching time:", "");
 
     }
 

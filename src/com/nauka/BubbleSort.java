@@ -2,15 +2,15 @@ package com.nauka;
 
 import java.util.List;
 
-public class SortingAlgorithms {
-    private final StopWatch stopWatch = new StopWatch();
-    List<String> sortedList;
+public class BubbleSort extends SortAlgorithm {
 
-    public boolean bubbleSort(List<String> listToSort, long time) {
-
+    @Override
+    boolean sort(List<String> listToSort, long time) {
         boolean repeat = true;
 
-        stopWatch.start("\n" + "Start searching (bubble sort + jump search)...");
+        getStopWatch().start();
+
+        System.out.println("\n" + "Start searching (bubble sort + jump search)...");
 
         while (repeat) {
 
@@ -25,25 +25,18 @@ public class SortingAlgorithms {
                 }
             }
 
-            stopWatch.stop();
+            getStopWatch().stop();
 
-            if ((stopWatch.getStopTime() - stopWatch.getStartTime()) > 10 * time) {
+            if ((getStopWatch().getTime() > 10 * time)) {
                 return true;
             }
 
         }
 
-        sortedList = listToSort;
+        setSortedList(listToSort);
 
         return false;
 
     }
 
-    public StopWatch getStopWatch() {
-        return stopWatch;
-    }
-
-    public List<String> getSortedList() {
-        return sortedList;
-    }
 }

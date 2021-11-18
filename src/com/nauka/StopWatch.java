@@ -25,14 +25,6 @@ public class StopWatch {
         return stopTime;
     }
 
-    public void setStartTime(long startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setStopTime(long stopTime) {
-        this.stopTime = stopTime;
-    }
-
     long getMin() {
         return (stopTime - startTime) / 60000;
     }
@@ -73,5 +65,8 @@ public class StopWatch {
         System.out.println(result);
     }
 
+    long getTime() {
+        return stopTime - startTime;
+    }
 
 }
