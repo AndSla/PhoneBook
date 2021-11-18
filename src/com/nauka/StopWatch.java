@@ -8,21 +8,8 @@ public class StopWatch {
         this.startTime = System.currentTimeMillis();
     }
 
-    void start(String message) {
-        System.out.println(message);
-        this.startTime = System.currentTimeMillis();
-    }
-
     void stop() {
         this.stopTime = System.currentTimeMillis();
-    }
-
-    public long getStartTime() {
-        return startTime;
-    }
-
-    public long getStopTime() {
-        return stopTime;
     }
 
     long getMin() {

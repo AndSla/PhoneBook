@@ -10,7 +10,6 @@ public class Main {
         File filePhoneBook = new File("small_directory.txt");
 
         Input input = new Input();
-
         List<String> linesToFind = input.loadFileToMemory(fileFind);
         List<String> linesFromPhoneBook = input.loadFileToMemory(filePhoneBook);
 
@@ -20,11 +19,11 @@ public class Main {
 
         StopWatch totalTime = new StopWatch();
 
-        totalTime.start();
-
         int foundedEntries = linear.search(linesToFind, linesFromPhoneBook, true);
         linear.getStopWatch().printResult(foundedEntries);
         long time = linear.getStopWatch().getTime();
+
+        totalTime.start();
 
         boolean takesTooLong = bubble.sort(linesFromPhoneBook, time);
         String message = "";
@@ -38,7 +37,6 @@ public class Main {
         totalTime.stop();
 
         totalTime.printResult(foundedEntries);
-
         bubble.getStopWatch().printResult("Sorting time:", message);
         linear.getStopWatch().printResult("Searching time:", "");
 

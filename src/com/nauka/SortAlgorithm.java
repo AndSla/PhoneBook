@@ -16,7 +16,8 @@ abstract class SortAlgorithm {
         return sortedList;
     }
 
-    public void setSortedList(List<String> sortedList) {
+    void setSortedList(List<String> sortedList) {
         this.sortedList = sortedList;
     }
+
 }
