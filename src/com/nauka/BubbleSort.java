@@ -5,7 +5,7 @@ import java.util.List;
 public class BubbleSort extends SortAlgorithm {
 
     @Override
-    boolean sort(List<String> listToSort, long time) {
+    List<String> sort(List<String> listToSort, long time) {
         boolean repeat = true;
 
         getStopWatch().start();
@@ -28,14 +28,13 @@ public class BubbleSort extends SortAlgorithm {
             getStopWatch().stop();
 
             if ((getStopWatch().getTime() > 10 * time)) {
-                return true;
+                setTooLong(true);
+                break;
             }
 
         }
 
-        setSortedList(listToSort);
-
-        return false;
+        return listToSort;
 
     }
 

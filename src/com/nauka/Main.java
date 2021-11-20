@@ -6,8 +6,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        File fileFind = new File("small_find.txt");
-        File filePhoneBook = new File("small_directory.txt");
+        File fileFind = new File("find.txt");
+        File filePhoneBook = new File("directory.txt");
 
         Input input = new Input();
         List<String> linesToFind = input.loadFileToMemory(fileFind);
@@ -16,29 +16,57 @@ public class Main {
         SearchAlgorithm linear = new LinearSearch();
         SearchAlgorithm block = new BlockSearch();
         SortAlgorithm bubble = new BubbleSort();
-
-        StopWatch totalTime = new StopWatch();
+        SortAlgorithm quick = new QuickSort();
 
         int foundedEntries = linear.search(linesToFind, linesFromPhoneBook, true);
         linear.getStopWatch().printResult(foundedEntries);
         long time = linear.getStopWatch().getTime();
 
+        StopWatch totalTime = new StopWatch();
+
+        //BubbleSort + BlockSearch
+//        totalTime.start();
+//
+//        bubble.setSortedList(bubble.sort(linesFromPhoneBook, time));
+//        String message = "";
+//        if (bubble.isTooLong()) {
+//            message = " - STOPPED, moved to linear search";
+//            foundedEntries = linear.search(linesToFind, linesFromPhoneBook, false);
+//        } else {
+//            foundedEntries = block.search(linesToFind, bubble.getSortedList(), false);
+//        }
+//
+//        totalTime.stop();
+//
+//        totalTime.printResult(foundedEntries);
+//        bubble.getStopWatch().printResult("Sorting time:", message);
+//        if (bubble.isTooLong()) {
+//            linear.getStopWatch().printResult("Searching time:", "");
+//        } else {
+//            block.getStopWatch().printResult("Searching time:", "");
+//        }
+
+        //QuickSort + BinarySearch
         totalTime.start();
 
-        boolean takesTooLong = bubble.sort(linesFromPhoneBook, time);
+        quick.setSortedList(quick.sort(linesFromPhoneBook, time));
         String message = "";
-        if (takesTooLong) {
+        if (quick.isTooLong()) {
             message = " - STOPPED, moved to linear search";
             foundedEntries = linear.search(linesToFind, linesFromPhoneBook, false);
         } else {
-            foundedEntries = block.search(linesToFind, bubble.getSortedList(), false);
+            foundedEntries = block.search(linesToFind, quick.getSortedList(), false);
         }
 
         totalTime.stop();
 
         totalTime.printResult(foundedEntries);
-        bubble.getStopWatch().printResult("Sorting time:", message);
-        linear.getStopWatch().printResult("Searching time:", "");
+        quick.getStopWatch().printResult("Sorting time:", message);
+        if (quick.isTooLong()) {
+            linear.getStopWatch().printResult("Searching time:", "");
+        } else {
+            block.getStopWatch().printResult("Searching time:", "");
+        }
 
     }
 

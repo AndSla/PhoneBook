@@ -5,8 +5,9 @@ import java.util.List;
 abstract class SortAlgorithm {
     private final StopWatch stopWatch = new StopWatch();
     protected List<String> sortedList;
+    private boolean tooLong = false;
 
-    abstract boolean sort(List<String> listToSort, long time);
+    abstract List<String> sort(List<String> listToSort, long time);
 
     StopWatch getStopWatch() {
         return stopWatch;
@@ -20,4 +21,11 @@ abstract class SortAlgorithm {
         this.sortedList = sortedList;
     }
 
+    public boolean isTooLong() {
+        return tooLong;
+    }
+
+    public void setTooLong(boolean tooLong) {
+        this.tooLong = tooLong;
+    }
 }

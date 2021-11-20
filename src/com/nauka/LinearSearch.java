@@ -5,12 +5,12 @@ import java.util.List;
 class LinearSearch extends SearchAlgorithm {
 
     @Override
-    int search(List<String> searchFor, List<String> searchIn, boolean msg) {
+    int search(List<String> searchFor, List<String> searchIn, boolean printMsg) {
         int count = 0;
 
         getStopWatch().start();
 
-        if (msg) {
+        if (printMsg) {
             System.out.println("Start searching (linear search)...");
         }
 
