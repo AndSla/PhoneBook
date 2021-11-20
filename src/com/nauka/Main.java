@@ -6,8 +6,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        File fileFind = new File("find.txt");
-        File filePhoneBook = new File("directory.txt");
+        File fileFind = new File("small_find.txt");
+        File filePhoneBook = new File("small_directory.txt");
 
         Input input = new Input();
         List<String> linesToFind = input.loadFileToMemory(fileFind);
@@ -15,6 +15,7 @@ public class Main {
 
         SearchAlgorithm linear = new LinearSearch();
         SearchAlgorithm block = new BlockSearch();
+        SearchAlgorithm binary = new BinarySearch();
         SortAlgorithm bubble = new BubbleSort();
         SortAlgorithm quick = new QuickSort();
 
@@ -24,38 +25,38 @@ public class Main {
 
         StopWatch totalTime = new StopWatch();
 
-        //BubbleSort + BlockSearch
-//        totalTime.start();
-//
-//        bubble.setSortedList(bubble.sort(linesFromPhoneBook, time));
-//        String message = "";
-//        if (bubble.isTooLong()) {
-//            message = " - STOPPED, moved to linear search";
-//            foundedEntries = linear.search(linesToFind, linesFromPhoneBook, false);
-//        } else {
-//            foundedEntries = block.search(linesToFind, bubble.getSortedList(), false);
-//        }
-//
-//        totalTime.stop();
-//
-//        totalTime.printResult(foundedEntries);
-//        bubble.getStopWatch().printResult("Sorting time:", message);
-//        if (bubble.isTooLong()) {
-//            linear.getStopWatch().printResult("Searching time:", "");
-//        } else {
-//            block.getStopWatch().printResult("Searching time:", "");
-//        }
+//      BubbleSort + BlockSearch
+        totalTime.start();
 
-        //QuickSort + BinarySearch
+        bubble.setSortedList(bubble.sort(linesFromPhoneBook, time));
+        String message = "";
+        if (bubble.isTooLong()) {
+            message = " - STOPPED, moved to linear search";
+            foundedEntries = linear.search(linesToFind, linesFromPhoneBook, false);
+        } else {
+            foundedEntries = block.search(linesToFind, bubble.getSortedList(), false);
+        }
+
+        totalTime.stop();
+
+        totalTime.printResult(foundedEntries);
+        bubble.getStopWatch().printResult("Sorting time:", message);
+        if (bubble.isTooLong()) {
+            linear.getStopWatch().printResult("Searching time:", "");
+        } else {
+            block.getStopWatch().printResult("Searching time:", "");
+        }
+
+//      QuickSort + BinarySearch
         totalTime.start();
 
         quick.setSortedList(quick.sort(linesFromPhoneBook, time));
-        String message = "";
+        message = "";
         if (quick.isTooLong()) {
             message = " - STOPPED, moved to linear search";
             foundedEntries = linear.search(linesToFind, linesFromPhoneBook, false);
         } else {
-            foundedEntries = block.search(linesToFind, quick.getSortedList(), false);
+            foundedEntries = binary.search(linesToFind, quick.getSortedList(), false);
         }
 
         totalTime.stop();
@@ -65,7 +66,7 @@ public class Main {
         if (quick.isTooLong()) {
             linear.getStopWatch().printResult("Searching time:", "");
         } else {
-            block.getStopWatch().printResult("Searching time:", "");
+            binary.getStopWatch().printResult("Searching time:", "");
         }
 
     }
