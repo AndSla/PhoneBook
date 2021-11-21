@@ -5,9 +5,10 @@ import java.util.List;
 
 public class Main {
 
+
     public static void main(String[] args) {
-        File fileFind = new File("small_find.txt");
-        File filePhoneBook = new File("small_directory.txt");
+        File fileFind = new File("find.txt");
+        File filePhoneBook = new File("directory.txt");
 
         Input input = new Input();
         List<String> linesToFind = input.loadFileToMemory(fileFind);
@@ -19,6 +20,7 @@ public class Main {
         SortAlgorithm bubble = new BubbleSort();
         SortAlgorithm quick = new QuickSort();
 
+//      LinearSearch
         int foundedEntries = linear.search(linesToFind, linesFromPhoneBook, true);
         linear.getStopWatch().printResult(foundedEntries);
         long time = linear.getStopWatch().getTime();
@@ -68,6 +70,19 @@ public class Main {
         } else {
             binary.getStopWatch().printResult("Searching time:", "");
         }
+
+//      HashTable
+        totalTime.start();
+
+        HashTable hashTable = new HashTable(linesFromPhoneBook);
+        HashTableSearch hash = new HashTableSearch();
+        foundedEntries = hash.search(linesToFind, hashTable.getHashedPhoneBook());
+
+        totalTime.stop();
+
+        totalTime.printResult(foundedEntries);
+        hashTable.getStopWatch().printResult("Creating time:", "");
+        hash.getStopWatch().printResult("Searching time:", "");
 
     }
 
